@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,7 @@ class ProyectoController extends Controller
     
     public function __construct(){
         $this->middleware('auth')->except(['all']);
+        $this->middleware('verified')->except(['all']);
     }
     
     

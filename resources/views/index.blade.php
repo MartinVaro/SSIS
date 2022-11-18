@@ -33,7 +33,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <div class="container">     
             <!-- Navbar Brand-->
-            @if (Route::has('login'))
+            @if (Route::has('login'));
                 @auth
                 <a class="navbar-brand ps-3" href="/" style="color:#51ff00; font-size: 15px;"></a>
                 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -58,7 +58,7 @@
                 <div class="main-menu d-none d-md-block ps-3">
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Log in</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Register</a>
+                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Registrarse</a>
                     @endif
                 @endauth
             </div>

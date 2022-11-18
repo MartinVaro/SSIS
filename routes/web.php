@@ -38,7 +38,6 @@ Route::get('/', function () {
 
 Route::get('/details', function(){
     return view('details');
-
 });
 
 Route::get('/profile', function(){

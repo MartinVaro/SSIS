@@ -26,8 +26,7 @@
    </head>
 
    <body>
-
-   
+       
     <header>
 
     <body class="sb-nav-fixed">
@@ -53,8 +52,6 @@
                     </ul>
                 </li>
             </ul>
-
-
                 @else
                 <div class="main-menu d-none d-md-block ps-3">
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Log in</a>
@@ -65,8 +62,6 @@
             </div>
         @endif
         </nav>
-
-
         <!-- Header Start -->
        <div class="header-area">
             <div class="main-header ">
@@ -133,30 +128,9 @@
        </div>
         <!-- Header End -->
     </header>
-
-
     
     <main>
     <!-- Trending Area Start -->
-
-    
-    <div class="container p-4">
-            <table class="table">
-                <tr class="p-3 mb-2 bg-info text-white">
-                    <th>Usuario</th>
-                    <th>Titulo</th>
-                </tr>
-
-                @foreach ($fechados as $proyecto)
-                <tr>
-                    <td>{{$proyecto->user->name}}</td> <!--Llama al metodo para mostrar el correo-->
-                    <td>{{$proyecto->titulo}}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
-
-
     <div class="trending-area fix">
         <div class="container">
             <div class="trending-main">
@@ -168,9 +142,9 @@
                             <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
-                                    @foreach ($proyectos as $proyecto)
-                                    <li class="news-item">{{$proyecto->titulo}}</li>
-                                    @endforeach
+                                    <li class="news-item">Aqui debemos de cambiarlo.</li>
+                                    <li class="news-item">Modificar estas frases con algo o quitarlo.......</li>
+                                    <li class="news-item">Asumakina.</li>
                                 </ul>
                             </div>
                             
@@ -180,68 +154,101 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <!-- Trending Top -->
-                        
                         <div class="trending-top mb-30">
                             <div class="trend-top-img">
                                 <img src="assets/img/trending/trending_top.jpg" alt="">
                                 <div class="trend-top-cap">
-                                    <span>{{$proyecto->titulo}}</span>
-                                    <h2><a href="proyecto/{{$proyecto->id}}">{{$proyecto->abstracto}}</a></h2>
+                                    <span>Appetizers</span>
+                                    <h2><a href="details.html">Welcome To The Best Model Winner<br> Contest At Look of the year</a></h2>
                                 </div>
                             </div>
                         </div>
                         <!-- Trending Bottom -->
                         <div class="trending-bottom">
                             <div class="row">
-                            <?php $a=1; ?>
-                                @foreach ($proyectos as $proyecto)  
-                                @if ($a<=3) 
+                                <div class="col-lg-4">
+                                <div class="single-bottom mb-35">
+                                    <div class="trend-bottom-img mb-30">
+                                        <img src="assets/img/trending/trending_bottom1.jpg" alt="">
+                                    </div>
+                                    <div class="trend-bottom-cap">
+                                        <span class="color1">Lifestyple</span>
+                                        <h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a></h4>
+                                    </div>
+                                </div>
+                                </div>
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
                                             <img src="assets/img/trending/trending_bottom2.jpg" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
-                                            <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
-                                            <p>{{$proyecto->abstracto}}</p>
+                                            <span class="color2">Sports</span>
+                                            <h4><h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a></h4></h4>
                                         </div>
                                     </div>
                                 </div>
-                                @endif
-                                <?php
-                                    $a=$a+1;
-                                ?>
-                                @if($a==4)
-                                    @break
-                                @endif
-                                @endforeach
-
-
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <span class="color3">Travels</span>
+                                            <h4><a href="details.html"> Welcome To The Best Model Winner Contest</a></h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Riht content -->
                     <div class="col-lg-4">
-                        <?php $a=0; ?>
-                        @foreach ($proyectos as $proyecto)
-                        @if ($a>=3)                
                         <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="assets/img/trending/right1.jpg" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
-                                    <p>{{$proyecto->abstracto}}</p>
-                                </div>
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right1.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color1">Concert</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
                         </div>
-                        @endif 
-                        <?php
-                            $a=$a+1;
-                        ?>
-                        @if ($a==7)
-                            @break
-                        @endif
-                        @endforeach
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right2.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color3">sea beach</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right3.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color2">Bike Show</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div> 
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right4.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color4">See beach</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right5.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color1">Skeping</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,24 +263,49 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
-                            <h3>Nuevos Proyectos</h3>
+                            <h3>Weekly Top News</h3>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="weekly-news-active dot-style d-flex dot-style">
-                            @foreach ($fechados as $proyecto)
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                    <img src="assets/img/news/weeklyNews2.jpg" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <span class="color1">Strike</span>
+                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                </div>
+                            </div> 
+                            <div class="weekly-single active">
+                                <div class="weekly-img">
+                                        <img src="assets/img/news/weeklyNews1.jpg" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <span class="color1">Strike</span>
+                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly-single">
+                                <div class="weekly-img">
+                                        <img src="assets/img/news/weeklyNews3.jpg" alt="">
+                                </div>
+                                <div class="weekly-caption">
+                                    <span class="color1">Strike</span>
+                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                </div>
+                            </div>
                             <div class="weekly-single">
                                 <div class="weekly-img">
                                     <img src="assets/img/news/weeklyNews1.jpg" alt="">
                                 </div>
-                                <div class="weekly-caption"> 
-                                    <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
-                                    <p>{{$proyecto->abstracto}}</p>
+                                <div class="weekly-caption">
+                                    <span class="color1">Strike</span>
+                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
                                 </div>
                             </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -282,7 +314,26 @@
     </div>           
     <!-- End Weekly-News -->
    
-
+    <!--Start pagination -->
+    <div class="pagination-area pb-45 text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="single-wrap d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted"></span></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
+                            </ul>
+                          </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End pagination  -->
     </main>
     
@@ -303,7 +354,6 @@
                                         <p>Agregar una descripción de la empresa en este lado.</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -365,48 +415,44 @@
 	<!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
-        <script src="{{asset('./assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
+        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
-		<script src="{{asset('./assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
-        <script src="{{asset('./assets/js/popper.min.js')}}"></script>
-        <script src="{{asset('./assets/js/bootstrap.min.js')}}"></script>
+		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
 	    <!-- Jquery Mobile Menu -->
-        <script src="{{asset('./assets/js/jquery.slicknav.min.js')}}"></script>
-
+        <script src="./assets/js/jquery.slicknav.min.js"></script>
 		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="{{asset('./assets/js/owl.carousel.min.js')}}"></script>
-        <script src="{{asset('./assets/js/slick.min.js')}}"></script>
+        <script src="./assets/js/owl.carousel.min.js"></script>
+        <script src="./assets/js/slick.min.js"></script>
         <!-- Date Picker -->
-        <script src="{{asset('./assets/js/gijgo.min.js')}}"></script>
+        <script src="./assets/js/gijgo.min.js"></script>
 		<!-- One Page, Animated-HeadLin -->
-        <script src="{{asset('./assets/js/wow.min.js')}}"></script>
-		<script src="{{asset('./assets/js/animated.headline.js')}}"></script>
-        <script src="{{asset('./assets/js/jquery.magnific-popup.js')}}"></script>
-
+        <script src="./assets/js/wow.min.js"></script>
+		<script src="./assets/js/animated.headline.js"></script>
+        <script src="./assets/js/jquery.magnific-popup.js"></script>
         <!-- Breaking New Pluging -->
-        <script src="{{asset('./assets/js/jquery.ticker.js')}}"></script>
-        <script src="{{asset('./assets/js/site.js')}}"></script>
-
+        <script src="./assets/js/jquery.ticker.js"></script>
+        <script src="./assets/js/site.js"></script>
 		<!-- Scrollup, nice-select, sticky -->
-        <script src="{{asset('./assets/js/jquery.scrollUp.min.js')}}"></script>
-        <script src="{{asset('./assets/js/jquery.nice-select.min.js')}}"></script>
-		<script src="{{asset('./assets/js/jquery.sticky.js')}}"></script>
+        <script src="./assets/js/jquery.scrollUp.min.js"></script>
+        <script src="./assets/js/jquery.nice-select.min.js"></script>
+		<script src="./assets/js/jquery.sticky.js"></script>
         
         <!-- contact js -->
-        <script src="{{asset('./assets/js/contact.js')}}"></script>
-        <script src="{{asset('./assets/js/jquery.form.js')}}"></script>
-        <script src="{{asset('./assets/js/jquery.validate.min.js')}}"></script>
-        <script src="{{asset('./assets/js/mail-script.js')}}"></script>
-        <script src="{{asset('./assets/js/jquery.ajaxchimp.min.js')}}"></script>
+        <script src="./assets/js/contact.js"></script>
+        <script src="./assets/js/jquery.form.js"></script>
+        <script src="./assets/js/jquery.validate.min.js"></script>
+        <script src="./assets/js/mail-script.js"></script>
+        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
         
 		<!-- Jquery Plugins, main Jquery -->	
-        <script src="{{asset('./assets/js/plugins.js')}}"></script>
-        <script src="{{asset('./assets/js/main.js')}}"></script>
+        <script src="./assets/js/plugins.js"></script>
+        <script src="./assets/js/main.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         
-        <script src="{{asset('//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="{{asset('//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if(session('crear')=='ok')
         <script>
             Swal.fire(
@@ -415,7 +461,6 @@
             'success')
         </script>
         @endif
-
         @if(session('eliminar')=='ok')
         <script>
             Swal.fire(
@@ -433,6 +478,5 @@
             'success')
         </script>
         @endif
-
     </body>
 </html>

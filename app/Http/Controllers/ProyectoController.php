@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+
+
+use Illuminate\Support\Collection;
 
 class ProyectoController extends Controller
 {
@@ -16,16 +20,40 @@ class ProyectoController extends Controller
      */
     
     public function __construct(){
-        $this->middleware('auth')->except(['all']);
-        $this->middleware('verified')->except(['all']);
+        $this->middleware('auth')->except(['all','show','home']);
+        $this->middleware('verified')->except(['all','show','home']);
     }
-    
-    
-    
-     public function index()
+
+
+
+    public function home()
+    {
+        
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $randoms = $proyectos->random(0);
+        $fechados = $proyectos->sortBy([['fecha','desc']]);
+        $userLog = Auth::id();
+        //return  compact('proyectos');
+        return view('index', compact('proyectos', 'randoms', 'fechados','userLog'));
+        //return view('/index', compact('proyectos', 'randoms', 'fechados','userLog'));
+        //$libros = Libro::all();
+        //return view('/libros.listaLibros', compact('libros', 'userLog'));
+    }
+
+
+
+
+
+
+
+
+
+    public function index()
     {
         $proyectos = Auth::user()->proyectos;
         return view('proyectos.indexProyectos', compact('proyectos'));
+        //return view('/index', compact('proyectos', 'userLog'));
         
     }
 
@@ -45,21 +73,28 @@ class ProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     
     public function all()
     {
-        //$proyectos= Proyecto::with('generos','user')->get();
+        $proyectos= Proyecto::with('user')->get();
+        $randoms = $proyectos->random(0);
+        $fechados = $proyectos->sortBy([['fecha','desc']]);
         $userLog = Auth::id();
+        //dd($fechados);
+        return  compact('proyectos');
+        //return view('/index', compact('proyectos', 'randoms', 'fechados','userLog'));
+        //return view('/index', compact('proyectos', 'randoms', 'fechados','userLog'));
         //$libros = Libro::all();
         //return view('/libros.listaLibros', compact('libros', 'userLog'));
     }
-
 
     public function store(Request $request)
     {
         //dd($request);
         $request->merge(['user_id'=> Auth::id()]);
         Proyecto::create($request->all());
-        return redirect('/')->with('crear','ok');
+        return redirect('/proyecto')->with('crear','ok');
     }
 
     /**

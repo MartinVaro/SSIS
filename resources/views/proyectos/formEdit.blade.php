@@ -3,18 +3,18 @@
 <head>
 		<!-- CSS here -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="assets/css/ticker-style.css">
-            <link rel="stylesheet" href="assets/css/flaticon.css">
-            <link rel="stylesheet" href="assets/css/slicknav.css">
-            <link rel="stylesheet" href="assets/css/animate.min.css">
-            <link rel="stylesheet" href="assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="assets/css/themify-icons.css">
-            <link rel="stylesheet" href="assets/css/slick.css">
-            <link rel="stylesheet" href="assets/css/nice-select.css">
-            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/ticker-style.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/slicknav.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/fontawesome-all.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/themify-icons.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/nice-select.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 </head>
 
 <body>
@@ -72,6 +72,23 @@
                 <div class="alert alert-danger">{{$message}}</div>
             @enderror
           </div>
+          
+             
+          <div  class="input-group p-4">
+            <label class="input-group-text btn-primary" for="categoria">Categoria</label>
+            <select class="form-select" name="categoria" id="categoria">
+                <option value=""></option>
+                <option value="Ambiente" {{isset($proyecto)&& $proyecto->categoria=='Ambiente' ? 'selected': ''}}>Ambiente</option>
+                <option value="Universo" {{isset($proyecto)&& $proyecto->categoria=='Universo' ? 'selected': ''}}>Universo</option>
+                <option value="Educación" {{isset($proyecto)&& $proyecto->categoria=='Educación' ? 'selected': ''}}>Educación</option>
+                <option value="Desarrollo Sustentable" {{isset($proyecto)&& $proyecto->categoria=='Desarrollo Sustentable' ? 'selected': ''}}>Desarrollo Sustentable</option>
+                <option value="Desarrollo Tecnológico" {{isset($proyecto)&& $proyecto->categoria=='Desarrollo Tecnológico' ? 'selected': ''}}>Desarrollo Tecnológico</option>
+                <option value="Energía" {{isset($proyecto)&& $proyecto->categoria=='Energía' ? 'selected': ''}}>Energía</option>
+                <option value="Salud" {{isset($proyecto)&& $proyecto->categoria=='Salud' ? 'selected': ''}}>Salud</option>
+                <option value="Sociedad" {{isset($proyecto)&& $proyecto->categoria=='Sociedad' ? 'selected': ''}}>Sociedad</option>
+            </select>
+          </div>
+                
           <div class="form-group p-4">
             <label for="descripcion" class="input-group-text btn-primary  bg-opacity-50">Descripcion</label>
             <textarea class="form-control"  name="descripcion" id="descripcion" cols="30" rows="10">{{isset($proyecto) ? $proyecto->descripcion  : ''}}</textarea><br>

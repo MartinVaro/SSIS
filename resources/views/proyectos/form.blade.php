@@ -64,6 +64,22 @@
                 <div class="alert alert-danger">{{$message}}</div>
             @enderror
           </div>
+
+          <div  class="input-group p-4">
+            <label class="input-group-text btn-primary" for="categoria">Categoria</label>
+            <select class="form-select" name="categoria" id="categoria">
+                <option value=""></option>
+                <option value="Ambiente">Ambiente</option>
+                <option value="Universo">Universo</option>
+                <option value="Educación">Educación</option>
+                <option value="Desarrollo Sustentable">Desarrollo Sustentable</option>
+                <option value="Desarrollo Tecnológico">Desarrollo Tecnológico</option>
+                <option value="Energía">Energía</option>
+                <option value="Salud">Salud</option>
+                <option value="Sociedad">Sociedad</option>
+            </select>
+          </div>
+
           <div class="form-group p-4">
             <label for="descripcion" class="input-group-text btn-primary  bg-opacity-50">Descripcion</label>
             <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="10">{{old('descripcion')}}</textarea>
@@ -78,8 +94,6 @@
                 <div class="alert alert-danger">{{$message}}</div>
             @enderror
           </div>
-
-
 
           <div class="form-group p-4">
             <label for="abstracto" class="input-group-text btn-primary  bg-opacity-50">Abstracto</label>

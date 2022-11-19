@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('proyectos', function (Blueprint $table) {
+        Schema::create('calificacions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); //nombre de la tabla en singular _id
-            $table->String('titulo');
-            $table->String('categoria');
-            //$table->String('carrera');
-            $table->Text('descripcion');
-            $table->Text('abstracto');
-            $table->date("fecha");
+            $table->foreignId('proyecto_id')->constrained()->onDelete('cascade');
+            $table->integer("ranking");
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proyectos');
+        Schema::dropIfExists('calificacions');
     }
 };

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\CalificacionController;
+use App\Http\Controllers\ComentarioController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -32,9 +34,16 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::get('/', function () {
-    return view('index');
-});
+//Route::get('/', function () {
+//    return view('index');
+//});
+
+
+Route::get('/', [ProyectoController::class, 'home'])->name('index');
+
+//Route::get('/', function () {
+//    return view('copi');
+//});
 
 Route::get('/details', function(){
     return view('details');
@@ -46,9 +55,18 @@ Route::get('/profile', function(){
 })->middleware('verified');
 
 
-Route::resource('proyecto',ProyectoController::class);
-
+Route::resource('proyecto', ProyectoController::class);
 Route::get('/all', [ProyectoController::class, 'all']);
+
+
+Route::resource('comentario', ComentarioController::class);
+Route::get('/all', [ComentarioController::class, 'all']);
+
+
+Route::resource('calificacion', CalificacionController::class);
+Route::get('/all', [CalificacionController::class, 'all']);
+
+
 
 Route::middleware([
     'auth:sanctum',

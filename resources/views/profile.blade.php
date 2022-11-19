@@ -11,18 +11,18 @@
 
 		<!-- CSS here -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="assets/css/ticker-style.css">
-            <link rel="stylesheet" href="assets/css/flaticon.css">
-            <link rel="stylesheet" href="assets/css/slicknav.css">
-            <link rel="stylesheet" href="assets/css/animate.min.css">
-            <link rel="stylesheet" href="assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="assets/css/themify-icons.css">
-            <link rel="stylesheet" href="assets/css/slick.css">
-            <link rel="stylesheet" href="assets/css/nice-select.css">
-            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/ticker-style.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/slicknav.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/fontawesome-all.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/themify-icons.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/nice-select.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
    </head>
 
    <body>

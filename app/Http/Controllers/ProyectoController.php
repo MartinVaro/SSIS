@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 use App\Models\Comentario;
+use App\Models\Calificacion;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
@@ -101,7 +102,13 @@ class ProyectoController extends Controller
         //dd($proyecto->id);
         $comentarios= Comentario::all();
         $comentarios= $comentarios->where('proyecto_id', $proyecto->id);
-        return view('/proyectos.showProyecto', compact('proyecto', 'comentarios'));
+
+        $calificacions= Calificacion::all();
+        $calificacions= $calificacions->where('proyecto_id', $proyecto->id);
+        $mycalificacion= $calificacions->where('user_id', Auth::id());
+    
+       
+        return view('/proyectos.showProyecto', compact('proyecto', 'comentarios', 'calificacions'));
     }
 
     /**

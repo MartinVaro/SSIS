@@ -115,6 +115,111 @@
                                 <div class="about-img">
                                     <img src="{{asset('assets/img/trending/trending_top.jpg')}}" alt="">
                                 </div>
+
+
+
+                        <!-- STAR Ranking -->
+                            @auth
+                            @if (Auth::id()!=$proyecto->user_id)
+                                @if(!$calificacions->where('user_id', Auth::id()))
+                                <div class="container d-flex justify-content-center mt-50">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="stars">
+                                                <form action="/calificacion" method="POST"> 
+                                                    @csrf 
+                                                    <input id="proyecto_id" name="proyecto_id" type="hidden" value="{{$proyecto->id}}">
+                                                    <input type="radio" class="star star-5" id="star-5"  value=5 name="ranking">  
+                                                    <label class="star star-5" for="star-5"></label>           
+                                                    <input type="radio" class="star star-4" id="star-4" value=4 name="ranking">
+                                                    <label class="star star-4" for="star-4"></label>
+                                                    <input type="radio" class="star star-3" id="star-3" value=3 name="ranking">
+                                                    <label class="star star-3" for="star-3"></label>
+                                                    <input type="radio" class="star star-2" id="star-2" value=2 name="ranking">
+                                                    <label class="star star-2" for="star-2"></label>
+                                                    <input type="radio" class="star star-1" id="star-1" value=1 name="ranking">
+                                                    <label class="star star-1" for="star-1"></label>
+                                                    
+                                                    
+                                                    <div class="button-group-area mt-10">
+                                                        <button class="genric-btn success-border radius">Calificar</button>
+                                                    </div>
+                                                </form> 
+                                            </div>            
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
+                                <div class="container d-flex justify-content-center mt-50">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="stars">
+                                                <?php 
+                                                $bool=true;
+                                                $siexiste=$calificacions->where('user_id', Auth::id()); 
+                                                if($siexiste->isEmpty()){
+                                                    $bool=false;
+                                                }
+                                                ?>
+                                                
+                                                @if($bool) 
+                                                    @foreach ($siexiste as $micali)
+                                                        @for ($i=1; $i<=$micali->ranking; $i++)
+                                                            <label class="star star-2" for="star-2"></label> 
+                                                        @endfor
+                                                    @endforeach                                   
+                                                </div>
+                                                    @if($micali)
+                                                        <form id="{{$micali->id}}" action="/calificacion/{{$micali->id}}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <input type="button" class="btn btn-warning btn-block rating-submit" onclick="pausar(event, {{$micali->id}});" value="Modificar">                                          
+                                                        </form>
+                                                    @endif
+                                                
+
+                                                @else
+                                                <div class="container d-flex justify-content-center mt-50">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="stars">
+                                                                <form action="/calificacion" method="POST"> 
+                                                                    @csrf 
+                                                                    <input id="proyecto_id" name="proyecto_id" type="hidden" value="{{$proyecto->id}}">
+                                                                    <input type="radio" class="star star-5" id="star-5"  value=5 name="ranking"/>  
+                                                                    <label class="star star-5" for="star-5"></label>           
+                                                                    <input type="radio" class="star star-4" id="star-4" value=4 name="ranking"/>
+                                                                    <label class="star star-4" for="star-4"></label>
+                                                                    <input type="radio" class="star star-3" id="star-3" value=3 name="ranking"/>
+                                                                    <label class="star star-3" for="star-3"></label>
+                                                                    <input type="radio" class="star star-2" id="star-2" value=2 name="ranking"/>
+                                                                    <label class="star star-2" for="star-2"></label>
+                                                                    <input type="radio" class="star star-1" id="star-1" value=1 name="ranking"/>
+                                                                    <label class="star star-1" for="star-1"></label>
+                                                                    <div class="buttons px-4 mt-0">
+                                                                        <button class="btn btn-warning btn-block rating-submit">Calificar</button>
+                                                                    </div>
+                                                                </form> 
+                                                            </div>            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endif
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            @endif
+                            @endauth
+                        <!-- End Ranking -->
+
+
+
+
+
+
+
                                 <div class="section-tittle mb-30 pt-30">
                                     <h3>Resumen</h3>
                                 </div>
@@ -222,6 +327,91 @@
 
 
 
+
+
+   <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <style>::-webkit-scrollbar {
+        width: 8px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+        
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; 
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    } body{
+    }
+    div.stars {
+    width: 270px;
+    display: inline-block;
+    }
+    .mt-200{
+        margin-top:200px;  
+    }
+    input.star { display: none; }
+
+    label.star {
+    float: right;
+    padding: 10px;
+    font-size: 36px;
+    color: #4A148C;
+    transition: all .2s;
+    }
+
+
+    
+    input.star:checked ~ label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+    }
+
+    input.star-5:checked ~ label.star:before {
+    color: #FE7;
+    text-shadow: 0 0 20px #952;
+    }
+
+    input.star-1:checked ~ label.star:before { color: #F62; }
+
+    label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+    label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+    }
+    
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 	<!-- JS here -->
 	
@@ -318,6 +508,27 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(contenedor).submit();
+                //document.queryselector.All();
+            }
+            })
+
+
+        };
+
+        function pausar(evt, contenedor){
+            evt.preventDefault();
+            Swal.fire({
+            title: '¿Está seguro?',
+            text: "Esta calificacion se eliminará, para que puedas asignar otra!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, cambiar!',
             cancelButtonText: 'Cancelar',
             }).then((result) => {
             if (result.isConfirmed) {

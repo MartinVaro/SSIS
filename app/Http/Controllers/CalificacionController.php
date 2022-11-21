@@ -38,7 +38,10 @@ class CalificacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->merge(['user_id'=> Auth::id()]);
+        //dd($request->proyecto_id);
+        Calificacion::create($request->all());
+        return back();
     }
 
     /**
@@ -83,6 +86,7 @@ class CalificacionController extends Controller
      */
     public function destroy(Calificacion $calificacion)
     {
-        //
+        $calificacion->delete();
+        return back();
     }
 }

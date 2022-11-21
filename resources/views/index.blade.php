@@ -139,23 +139,6 @@
     <main>
     <!-- Trending Area Start -->
 
-    
-    <div class="container p-4">
-            <table class="table">
-                <tr class="p-3 mb-2 bg-info text-white">
-                    <th>Usuario</th>
-                    <th>Titulo</th>
-                </tr>
-
-                @foreach ($fechados as $proyecto)
-                <tr>
-                    <td>{{$proyecto->user->name}}</td> <!--Llama al metodo para mostrar el correo-->
-                    <td>{{$proyecto->titulo}}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
-
 
     <div class="trending-area fix">
         <div class="container">
@@ -168,7 +151,7 @@
                             <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
-                                    @foreach ($proyectos as $proyecto)
+                                    @foreach ($combined as $proyecto)
                                     <li class="news-item">{{$proyecto->titulo}}</li>
                                     @endforeach
                                 </ul>
@@ -185,17 +168,27 @@
                             <div class="trend-top-img">
                                 <img src="assets/img/trending/trending_top.jpg" alt="">
                                 <div class="trend-top-cap">
-                                    <span>{{$proyecto->titulo}}</span>
-                                    <h2><a href="proyecto/{{$proyecto->id}}">{{$proyecto->abstracto}}</a></h2>
+                                    <?php $a=0; ?>
+                                    @foreach ($combined as $proyecto)
+                                        @if ($a==0)
+                                        <span>{{$proyecto->titulo}}</span>
+                                        <h2><a href="proyecto/{{$proyecto->id}}">{{$proyecto->abstracto}}</a></h2>
+                                        @endif
+                                    <?php $a=$a+1;?>
+                                    @if($a==1)
+                                        @break
+                                    @endif
+                                    @endforeach
+                                
                                 </div>
                             </div>
                         </div>
                         <!-- Trending Bottom -->
                         <div class="trending-bottom">
                             <div class="row">
-                            <?php $a=1; ?>
-                                @foreach ($proyectos as $proyecto)  
-                                @if ($a<=3) 
+                            <?php $a=0; ?>
+                                @foreach ($combined as $proyecto)  
+                                @if ($a>=1 && $a<=3) 
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
@@ -223,8 +216,8 @@
                     <!-- Riht content -->
                     <div class="col-lg-4">
                         <?php $a=0; ?>
-                        @foreach ($proyectos as $proyecto)
-                        @if ($a>=3)                
+                        @foreach ($combined as $proyecto)
+                        @if ($a>=4 && $a<=7)                
                         <div class="trand-right-single d-flex">
                                 <div class="trand-right-img">
                                     <img src="assets/img/trending/right1.jpg" alt="">
@@ -238,7 +231,7 @@
                         <?php
                             $a=$a+1;
                         ?>
-                        @if ($a==7)
+                        @if ($a==8)
                             @break
                         @endif
                         @endforeach
@@ -291,7 +284,7 @@
        <div class="footer-area footer-padding fix">
             <div class="container">
                 <div class="row d-flex justify-content-between">
-                    <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12">
+                    <div class="col-xl-5 col-lg-5 col-md-2 col-sm-2">
                         <div class="single-footer-caption">
                             <div class="single-footer-caption">
                                 <!-- logo -->
@@ -300,66 +293,18 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p>Agregar una descripción de la empresa en este lado.</p>
+                                        <p>La red donde tu proyecto crece.</p>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-lg-5 col-md-7  col-sm-12">
-                        <div class="single-footer-caption">
-                            <div class="footer-tittle">
-                                <h4>Newsletter</h4>
-                                <p>Heaven fruitful doesn't over les idays appear creeping</p>
-                                <!-- Form -->
-                                <div class="footer-form" >
-                                    <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                        method="get" class="subscribe_form relative mail_part">
-                                            <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                                            class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = ' Email Address '">
-                                            <div class="form-icon">
-                                            <button type="submit" name="submit" id="newsletter-submit"
-                                            class="email_icon newsletter-submit button-contactForm"><img src="assets/img/logo/form-iocn.png" alt=""></button>
-                                            </div>
-                                            <div class="mt-10 info"></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
        <!-- footer-bottom aera -->
-       <div class="footer-bottom-area">
-           <div class="container">
-               <div class="footer-border">
-                    <div class="row d-flex align-items-center justify-content-between">
-                        <div class="col-lg-6">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="footer-menu f-right">
-                                <ul>                             
-                                    <li><a href="#">Terms of use</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-           </div>
-       </div>
-       <!-- Footer End-->
    </footer>
    
 	<!-- JS here -->

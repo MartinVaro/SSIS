@@ -40,7 +40,14 @@ class CalificacionController extends Controller
     {
         $request->merge(['user_id'=> Auth::id()]);
         //dd($request->proyecto_id);
-        Calificacion::create($request->all());
+
+        if($request->has('ranking')) {
+            Calificacion::create($request->all());
+        }
+        else{
+            $request->merge(['ranking'=> 0]);
+            Calificacion::create($request->all());
+        }
         return back();
     }
 

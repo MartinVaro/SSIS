@@ -99,14 +99,22 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="trending-tittle">
-                                <strong>{{$proyecto->titulo}}</strong>              
-                            </div>
-                            
-                            <div class="about-left mb-20">
-                                <p>Fecha de creación: {{$proyecto->fecha}}</p>            
-                            </div>
+                                <h3 class="mb-10 genric-btn success-border e-large" style="font-size: 25px;" type="button">{{$proyecto->titulo}}</h3>             
+                            </div>        
                         </div>
-                    </div>
+
+                <!-- Calificación principal-->
+                <?php 
+                    $avg=$calificacions->avg('ranking');
+                    $avg=round($avg,1);
+                ?>
+
+                <div class="text-right">
+                    <h3 class="mb-10 genric-btn warning e-large" style="font-size: 25px;" type="button">{{$avg}} / 5</h3>
+                    <p>Fecha de creación: {{$proyecto->fecha}}</p>
+			    </div>
+
+                </div>
                    <div class="row">
                         <div class="col-lg-12">
                             <!-- Trending Tittle -->
@@ -115,7 +123,6 @@
                                 <div class="about-img">
                                     <img src="{{asset('assets/img/trending/trending_top.jpg')}}" alt="">
                                 </div>
-
 
 
                         <!-- STAR Ranking -->
@@ -280,7 +287,7 @@
                                     <input id="proyecto_id" name="proyecto_id" type="hidden" value="{{$proyecto->id}}">
                                 </div>
                                 <div class="form-group mt-3">
-                                    <button type="submit" class="genric-btn info circle">Enviar</button>
+                                    <button type="submit" class="genric-btn success-border radius">Enviar</button>
                                 </div>
                             </form>
                         </div>
@@ -313,7 +320,7 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p>Agregar una descripción de la empresa en este lado.</p>
+                                        <p>La red donde tu proyecto crece.</p>
                                     </div>
                                 </div>
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); //nombre de la tabla en singular _id
             $table->foreignId('proyecto_id')->constrained()->onDelete('cascade');
-            $table->integer("ranking")->default('1');
+            $table->integer("ranking");
             $table->timestamps();
         });
     }

@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-
-use App\Models\Comentario;
 use App\Models\Calificacion;
-
+use App\Models\Comentario;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Collection;
 
@@ -33,11 +32,31 @@ class ProyectoController extends Controller
         
         $proyectos= Proyecto::with('user')->get();
         $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $calificacions= DB::select("SELECT proyectos.id,  proyectos.user_id, titulo, categoria, descripcion, abstracto, fecha, avg(ranking) as promedio
+            FROM proyectos LEFT JOIN calificacions ON proyectos.id=proyecto_id 
+            GROUP BY proyectos.id
+            ORDER BY avg(ranking) DESC;");
+
+        $collection = collect();
+        
+        foreach($calificacions as $cali){
+            $combined = $collection->push($cali);
+        }
+
+        //$combined = $collection->combine($calificacions);
+
+        $combined= $combined->whereNotIn('user_id', [Auth::id()]);
+
+        //$calificacions= Calificacion::with('user')->get();
+        //$avg=$calificacions->avg('ranking');
+        //$calificacions= DB::select("SELECT proyecto_id, avg(ranking) FROM calificacions GROUP BY proyecto_id ORDER BY avg(ranking) DESC;");
+        
+ 
         $randoms = $proyectos->random(0);
         $fechados = $proyectos->sortBy([['fecha','desc']]);
         $userLog = Auth::id();
         //return  compact('proyectos');
-        return view('index', compact('proyectos', 'randoms', 'fechados','userLog'));
+        return view('index', compact('proyectos', 'combined', 'fechados','userLog'));
         //return view('/index', compact('proyectos', 'randoms', 'fechados','userLog'));
         //$libros = Libro::all();
         //return view('/libros.listaLibros', compact('libros', 'userLog'));

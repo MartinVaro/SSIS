@@ -74,7 +74,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="/all"><img src="{{asset('assets/img/logo/hydrablack.png')}}" alt=""></a>
+                                    <a href="/"><img src="{{asset('assets/img/logo/hydrablack.png')}}" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -120,26 +120,77 @@
                                 </div>
                                 <div class="about-prea">
                                     <p class="about-pera1 mb-25">{{$proyecto->abstracto}}</p>
-                                </div> 
-                                <div class="about-prea">
-                                    <p class="about-pera1 mb-25">Carrera: {{$proyecto->titulo}}</p>
-                                </div> 
+                                </div>  
                                 <div class="about-prea">
                                     <p class="about-pera1 mb-25">Temática: {{$proyecto->categoria}}</p>
                                 </div> 
-                                <div class="section-tittle">
+                                <div class="section-tittle mb-30 pt-30">
                                     <h3>Descripción</h3>
                                 </div>
                                 <div class="about-prea">
                                     <p class="about-pera1 mb-25">{{$proyecto->descripcion}}</p>
                                 </div>
+                                
+                                <div class="section-tittle mb-30 pt-30"">
+                                    <h3>Comentarios</h3>
+                                </div>
 
-                            </div>
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach ($comentarios as $comentario)
+                                        <tr>
+                                            <td  width="200" class="about-pera1" style="color:#0db851;">{{$comentario->user->name}} {{$comentario->user->apellido}} :</td>
+                                            <td class="about-pera1 mb-25"">{{$comentario->coment}}</td>
+                                            @auth
+                                            @if (Auth::id()==$comentario->user_id)
+                                            <td>
+                                                <form id="{{$comentario->id}}" action="/comentario/{{$comentario->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="button" class="genric-btn danger-border radius" onclick="detener(event, {{$comentario->id}});" value="Borrar">                                          
+                                                </form>
+                                            </td>
+                                            @endif
+                                            @endauth
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
                         </div>
-                        
+            
+                
+                @if (Route::has('login'))
+                @auth
+                    <!-- From -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="/comentario" method="POST"> {{--Crear--}}
+                                @csrf
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control w-100 error" name="coment" id="coment" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Ingresa tu comentario"></textarea>
+                                        </div>
+                                    </div>
+                                    <input id="proyecto_id" name="proyecto_id" type="hidden" value="{{$proyecto->id}}">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="genric-btn info circle">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endauth
+                @endif
+
                    </div>
             </div>
+
+            
         </div>
+
+        
+
         <!-- About US End -->
     </main>
 
@@ -153,7 +204,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{{asset('assets/img/logo/hydra2_footer2.png')}}" alt=""></a>
+                                    <a href="/"><img src="{{asset('assets/img/logo/hydra2_footer2.png')}}" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
@@ -244,5 +295,37 @@
         </script>
         @endif
 
+
+
+        
     </body>
 </html>
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+        <script type="text/javascript">
+        function detener(evt, contenedor){
+            evt.preventDefault();
+            Swal.fire({
+            title: '¿Está seguro?',
+            text: "Este comentario se eliminará definitivamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(contenedor).submit();
+                //document.queryselector.All();
+            }
+            })
+
+
+        };
+</script>

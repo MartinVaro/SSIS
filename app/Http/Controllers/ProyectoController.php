@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+
+use App\Models\Comentario;
+
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
@@ -24,8 +27,6 @@ class ProyectoController extends Controller
         $this->middleware('verified')->except(['all','show','home']);
     }
 
-
-
     public function home()
     {
         
@@ -40,14 +41,6 @@ class ProyectoController extends Controller
         //$libros = Libro::all();
         //return view('/libros.listaLibros', compact('libros', 'userLog'));
     }
-
-
-
-
-
-
-
-
 
     public function index()
     {
@@ -105,7 +98,10 @@ class ProyectoController extends Controller
      */
     public function show(Proyecto $proyecto)
     {
-        return view('/proyectos.showProyecto', compact('proyecto'));
+        //dd($proyecto->id);
+        $comentarios= Comentario::all();
+        $comentarios= $comentarios->where('proyecto_id', $proyecto->id);
+        return view('/proyectos.showProyecto', compact('proyecto', 'comentarios'));
     }
 
     /**

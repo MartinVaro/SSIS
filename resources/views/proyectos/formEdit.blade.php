@@ -76,7 +76,7 @@
              
           <div  class="input-group p-4">
             <label class="input-group-text btn-primary" for="categoria">Categoria</label>
-            <select class="form-select" name="categoria" id="categoria">
+            <select class="form-select" name="categoria" id="categoria" required>
                 <option value=""></option>
                 <option value="Ambiente" {{isset($proyecto)&& $proyecto->categoria=='Ambiente' ? 'selected': ''}}>Ambiente</option>
                 <option value="Universo" {{isset($proyecto)&& $proyecto->categoria=='Universo' ? 'selected': ''}}>Universo</option>

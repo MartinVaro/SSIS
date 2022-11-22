@@ -98,15 +98,15 @@
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
                                     <nav>                  
-                                        <ul id="navigation">    
-                                            <li><a href="#"style="color:#0db851;">Ambiente</a></li>
-                                            <li><a href="#"style="color:#0db851;">Universo</a></li>
-                                            <li><a href="#"style="color:#0db851;">Educación</a></li>
-                                            <li><a href="#"style="color:#0db851;">Sustentable</a></li>
-                                            <li><a href="#"style="color:#0db851;">Tecnológico</a></li>
-                                            <li><a href="#"style="color:#0db851;">Energía</a></li>
-                                            <li><a href="#"style="color:#0db851;">Salud</a></li>
-                                            <li><a href="#"style="color:#0db851;">Sociedad</a></li>
+                                        <ul id="navigation">  
+                                            <li><a href="/categoria/ambiente"style="color:#0db851;">Ambiente</a></li>
+                                            <li><a href="/categoria/universo"style="color:#0db851;">Universo</a></li>
+                                            <li><a href="/categoria/educacion"style="color:#0db851;">Educación</a></li>
+                                            <li><a href="/categoria/sustentable" style="color:#0db851;">Sustentable</a></li>
+                                            <li><a href="/categoria/tecnologico"style="color:#0db851;">Tecnológico</a></li>
+                                            <li><a href="/categoria/energia"style="color:#0db851;">Energía</a></li>
+                                            <li><a href="/categoria/salud"style="color:#0db851;">Salud</a></li>
+                                            <li><a href="/categoria/sociedad"style="color:#0db851;">Sociedad</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -262,6 +262,7 @@
                                     <img src="assets/img/news/weeklyNews1.jpg" alt="">
                                 </div>
                                 <div class="weekly-caption"> 
+                                    
                                     <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
                                     <p>{{$proyecto->abstracto}}</p>
                                 </div>
@@ -289,7 +290,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="/"><img src="assets/img/logo/hydra2_footer2.png" alt=""></a>
+                                    <a href="/"><img src="{{asset('assets/img/logo/hydra2_footer2.png')}}" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">

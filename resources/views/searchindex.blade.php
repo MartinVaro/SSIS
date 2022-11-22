@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Categorías</title>
+        <title>Buscar</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -151,7 +151,7 @@
                         @endforeach
                         <div class="col-lg-12">
                             <div class="trending-tittle">
-                                <strong>{{$proyecto->categoria}}</strong>                    
+                                <strong>Proyectos encontrados</strong>                    
                             </div>
                         </div>
                     </div>

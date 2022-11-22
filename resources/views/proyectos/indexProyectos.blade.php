@@ -1,26 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Nuevo Proyecto</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Proyecto</title>
-</head>
+		<!-- CSS here -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/ticker-style.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/slicknav.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/fontawesome-all.min.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/themify-icons.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/nice-select.css')}}">
+            <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+   </head>
 
-<body>
+   <body>
+       
+    <header>
 
-<header>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <div class="container">
-                
+            <div class="container">     
             <!-- Navbar Brand-->
-            @if (Route::has('login'))
+            @if (Route::has('login'));
                 @auth
-                <a class="navbar-brand ps-3" href="/" style="color:#51ff00; font-size: 15px;">Home</a>
+                <a class="navbar-brand ps-3" href="/" style="color:#51ff00; font-size: 15px;"></a>
                 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <a class="navbar-brand ps-3" href="{{ url('/profile') }}" style="color:#51ff00; font-size: 15px;">{{ Auth::user()->name }} {{ Auth::user()->apellido }}</a>
                 <li class="nav-item dropdown">
@@ -37,25 +52,99 @@
                     </ul>
                 </li>
             </ul>
+
+
                 @else
                 <div class="main-menu d-none d-md-block ps-3">
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Log in</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Registrarse</a>
+                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Registrarse</a>
                     @endif
                 @endauth
-                </div>
-          @endif
-          </div>
+            </div>
+        @endif
         </nav>
-  </body>
+
+        <!-- Header Start -->
+       <div class="header-area">
+            <div class="main-header ">
+                <div class="header-mid d-none d-md-block">
+                   <div class="container">
+                        <div class="row d-flex align-items-center">
+                            <!-- Logo -->
+                            <div class="col-xl-3 col-lg-3 col-md-3">
+                                <div class="logo">
+                                    <a href="/"><img src="{{asset('assets/img/logo/hydrablack.png')}}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-xl-9 col-lg-9 col-md-9">
+                                <div class="header-banner f-left ">
+                                    <img src="{{asset('assets/img/hero/header_hydra.png')}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+       </div>
+        <!-- Header End -->
+    </header>
 
 
-</header>
+        <!-- About US Start -->
+        <div class="about-area">
+            <div class="container">
+                   <div class="row">
+                        <div class="col-lg-10">
+                            <!-- Trending Tittle -->
+                            <div class="about-right mb-90">
+                                
+                            <h1 class="p-4 text-info text-center">Mi listado de proyectos</h1>
+                                <div class="conteiner-fluid" >
+                                <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <tr class="p-3 mb-2 bg-info text-white">
+                                            <th>ID</th>
+                                            <th>Titulo</th>
+                                            <th>Descripción</th>
+                                            <th>Abstracto</th>
+                                            <th>Fecha</th>
+                                        <th style="width:10px;"> Acciones </th>
+                                        </tr>
+                                        @foreach ($proyectos as $proyecto)
+                                        <tr>
+                                            <td>{{$proyecto->id}}</td>
+                                            <td>{{$proyecto->titulo}}</td>
+                                            <td>{{$proyecto->descripcion}}</td>
+                                            <td>{{$proyecto->abstracto}}</td>
+                                            <td>{{$proyecto->fecha}}</td>
+                                            <td> <a href="proyecto/{{$proyecto->id}}" class="genric-btn success-border medium">Mostrar</a>
+                                                <a href="proyecto/{{$proyecto->id}}/edit" class="genric-btn info-border medium"> Editar </a>
+                                                <form id="{{$proyecto->id}}" action="proyecto/{{$proyecto->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="button" class="genric-btn danger-border medium" onclick="detener(event, {{$proyecto->id}});" value="Borrar"> 
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                                </div>
+                                </div>
+                        </div>
+                        
+                   </div>
+            </div>
+        </div>
 
 
-    <script>
-	<!-- JS here -->
+        <!-- About US End -->
+    </main>
+
+
+<!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -96,87 +185,43 @@
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-        @if(session('crear')=='ok')
-        <script>
-            Swal.fire(
-            'Registro completo!',
-            'Tu proyecto se creó con éxito',
-            'success')
-        </script>
-        @endif
-
-        @if(session('eliminar')=='ok')
-        <script>
-            Swal.fire(
-            'Eliminado!',
-            'Tu proyecto se eliminó con éxito',
-            'success')
-        </script>
-        @endif
-        
-        @if(session('editar')=='ok')
-        <script>
-            Swal.fire(
-            'Editado!',
-            'Tu proyecto se actualizó con éxito',
-            'success')
-        </script>
-        @endif
+    
     </body>
 </html>
 
 
-<main>
-        <!-- About US Start -->
-        <div class="about-area">
-            <div class="container">
-                   <div class="row">
-                        <div class="col-lg-10">
-                            <!-- Trending Tittle -->
-                            <div class="about-right mb-90">
-                                
-                            <h1 class="p-4 text-info text-center">Mi listado de proyectos</h1>
-                            <!--<a href="proyectos/create">Añadir proyecto</a> <a href="index">Inicio</a>-->
-                                <div class="conteiner-fluid" >
-                                <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <tr class="p-3 mb-2 bg-info text-white">
-                                            <th>ID</th>
-                                            <th>Titulo</th>
-                                            <th>Descripcion</th>
-                                            <th>Abstracto</th>
-                                            <th>Fecha</th>
-                                        <th style="width:10px;"> Acciones </th>
-                                        </tr>
-                                        @foreach ($proyectos as $proyecto)
-                                        <tr>
-                                            <td>{{$proyecto->id}}</td>
-                                            <td>{{$proyecto->titulo}}</td>
-                                            <td>{{$proyecto->descripcion}}</td>
-                                            <td>{{$proyecto->abstracto}}</td>
-                                            <td>{{$proyecto->fecha}}</td>
-                                            <td> <a href="proyecto/{{$proyecto->id}}" class="btn btn-success text-white m-1">Detalles</a>
-                                                <a href="proyecto/{{$proyecto->id}}/edit" class="btn btn-primary text-white  m-1">Editar</a>
-                                                <form id="{{$proyecto->id}}" action="proyecto/{{$proyecto->id}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="button" class="btn btn-danger active" onclick="detener(event, {{$proyecto->id}});" value="Borrar"> 
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                </div>
-                                </div>
-                                </div>
-                        </div>
-                        
-                   </div>
-            </div>
-        </div>
-        <!-- About US End -->
-    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

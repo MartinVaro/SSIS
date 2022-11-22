@@ -41,13 +41,17 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/', [ProyectoController::class, 'home'])->name('index');
 
-//Route::get('/', function () {
-//    return view('copi');
-//});
 
-Route::get('/details', function(){
-    return view('details');
-});
+Route::get('/search', [ProyectoController::class, 'search'])->name('searchindex');
+Route::get('/categoria/ambiente', [ProyectoController::class, 'search_ambiente'])->name('trindex');
+Route::get('/categoria/universo', [ProyectoController::class, 'search_universo'])->name('trindex');
+Route::get('/categoria/educacion', [ProyectoController::class, 'search_educacion'])->name('trindex');
+Route::get('/categoria/sustentable', [ProyectoController::class, 'search_sustentable'])->name('trindex');
+Route::get('/categoria/tecnologico', [ProyectoController::class, 'search_tecnologico'])->name('trindex');
+Route::get('/categoria/energia', [ProyectoController::class, 'search_energia'])->name('trindex');
+Route::get('/categoria/salud', [ProyectoController::class, 'search_salud'])->name('trindex');
+Route::get('/categoria/sociedad', [ProyectoController::class, 'search_sociedad'])->name('trindex');
+
 
 Route::get('/profile', function(){
     return view('profile');

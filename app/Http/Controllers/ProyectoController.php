@@ -22,9 +22,10 @@ class ProyectoController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+
     public function __construct(){
-        $this->middleware('auth')->except(['all','show','home']);
-        $this->middleware('verified')->except(['all','show','home']);
+        $this->middleware('auth')->except(['all','show','home','search','search_ambiente', 'search_universo', 'search_educacion', 'search_tecnologico', 'search_energia', 'search_salud', 'search_sociedad','search_sustentable']);
+        $this->middleware('verified')->except(['all','show','home','search','search_ambiente', 'search_universo', 'search_educacion', 'search_tecnologico', 'search_energia', 'search_salud', 'search_sociedad','search_sustentable']);
     }
 
     public function home()
@@ -69,6 +70,91 @@ class ProyectoController extends Controller
         //return view('/index', compact('proyectos', 'userLog'));
         
     }
+
+    public function search(Request $request)
+    {
+
+        $proyectos= DB::select("SELECT proyectos.id, user_id, titulo, categoria, descripcion, abstracto, fecha FROM proyectos 
+        WHERE titulo LIKE '%$request->buscar%' 
+        or categoria LIKE '%$request->buscar%'
+        or descripcion LIKE '%$request->buscar%'
+        or abstracto LIKE '%$request->buscar%';");
+
+        $collection = collect();
+        
+        foreach($proyectos as $proyecto){
+            $proyectos = $collection->push($proyecto);
+        }
+        //dd($proyectos->search($request->buscar));
+        return view('searchindex', compact('proyectos'));      
+    }
+
+
+    public function search_ambiente()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Ambiente');
+        return view('trindex', compact('proyectos'));      
+    }
+
+    public function search_universo()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Universo');
+        return view('trindex', compact('proyectos'));      
+    }
+
+    public function search_educacion()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Educación');
+        return view('trindex', compact('proyectos'));      
+    }
+
+    public function search_sustentable()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Desarrollo Sustentable');
+        return view('trindex', compact('proyectos'));      
+    }
+
+
+    public function search_tecnologico()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Desarrollo Tecnológico');
+        return view('trindex', compact('proyectos'));      
+    }
+
+    public function search_energia()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Energía');
+        return view('trindex', compact('proyectos'));      
+    }
+
+    public function search_salud()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Salud');
+        return view('trindex', compact('proyectos'));      
+    }
+
+    public function search_sociedad()
+    {
+        $proyectos= Proyecto::with('user')->get();
+        $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        $proyectos= $proyectos->where('categoria', 'Sociedad');
+        return view('trindex', compact('proyectos'));      
+    }
+
 
     /**
      * Show the form for creating a new resource.

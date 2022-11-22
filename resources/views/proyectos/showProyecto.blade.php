@@ -306,6 +306,7 @@
         <!-- About US End -->
     </main>
 
+    
     <footer>
        <!-- Footer Start-->
        <div class="footer-area footer-padding fix">
@@ -397,27 +398,6 @@
     }
     
     </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
    
 	<!-- JS here -->

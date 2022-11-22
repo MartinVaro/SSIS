@@ -107,7 +107,7 @@
                                         <tr class="p-3 mb-2 bg-info text-white">
                                             <th>ID</th>
                                             <th>Titulo</th>
-                                            <th>Descripción</th>
+                                            <th>Recaudado</th>
                                             <th>Abstracto</th>
                                             <th>Fecha</th>
                                         <th style="width:10px;"> Acciones </th>
@@ -116,7 +116,7 @@
                                         <tr>
                                             <td>{{$proyecto->id}}</td>
                                             <td>{{$proyecto->titulo}}</td>
-                                            <td>{{$proyecto->descripcion}}</td>
+                                            <td>${{$proyecto->recaudado}}</td>
                                             <td>{{$proyecto->abstracto}}</td>
                                             <td>{{$proyecto->fecha}}</td>
                                             <td> <a href="proyecto/{{$proyecto->id}}" class="genric-btn success-border medium">Mostrar</a>

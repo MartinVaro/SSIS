@@ -13,6 +13,10 @@ class Proyecto extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function donacions(){
+        return $this->hasMany(Donacion::class);
+    }
+    
     public $timestamps =false;
     protected $fillable = ['user_id','titulo','categoria','descripcion','abstracto','fecha'];
 

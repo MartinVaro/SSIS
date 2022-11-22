@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+use Carbon\Carbon;
+use App\Models\Donacion;
 use App\Models\Calificacion;
 use App\Models\Comentario;
 use App\Models\Proyecto;
@@ -30,7 +32,8 @@ class ProyectoController extends Controller
 
     public function home()
     {
-        
+        //$date = Carbon::now();
+        //dd($date->format('Y-m-d'));
         $proyectos= Proyecto::with('user')->get();
         $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
         $calificacions= DB::select("SELECT proyectos.id,  proyectos.user_id, titulo, categoria, descripcion, abstracto, fecha, avg(ranking) as promedio
@@ -43,8 +46,6 @@ class ProyectoController extends Controller
         foreach($calificacions as $cali){
             $combined = $collection->push($cali);
         }
-
-        //$combined = $collection->combine($calificacions);
 
         $combined= $combined->whereNotIn('user_id', [Auth::id()]);
 
@@ -65,7 +66,21 @@ class ProyectoController extends Controller
 
     public function index()
     {
-        $proyectos = Auth::user()->proyectos;
+
+        $donacions= DB::select("SELECT proyectos.id,  proyectos.user_id, titulo, categoria, descripcion, abstracto, proyectos.fecha, sum(cantidad) as recaudado
+        FROM proyectos LEFT JOIN donacions ON proyectos.id=proyecto_id 
+        GROUP BY proyectos.id
+        ORDER BY sum(cantidad) DESC;");
+
+        $collection = collect();
+        
+    
+        foreach($donacions as $cali){
+            $combined = $collection->push($cali);
+        }
+        $id=Auth::id();
+        $proyectos= $combined->where('user_id', $id);
+        
         return view('proyectos.indexProyectos', compact('proyectos'));
         //return view('/index', compact('proyectos', 'userLog'));
         
@@ -191,6 +206,21 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+
+        $request->validate([
+            'titulo'=> 'required',
+            'categoria'=> 'required',
+            'imagen'=> 'image', 
+            'descripcion'=> 'required',
+            'abstracto'=> 'required', 
+            'fecha'=> 'required', 
+        ]);
+
+        if($request->hasFile('imagen')){
+            $direccion=$request->file('imagen')->store('public');
+            $request->merge(['portada'=> $direccion]);
+        }
+
         $request->merge(['user_id'=> Auth::id()]);
         Proyecto::create($request->all());
         return redirect('/proyecto')->with('crear','ok');
@@ -210,10 +240,13 @@ class ProyectoController extends Controller
 
         $calificacions= Calificacion::all();
         $calificacions= $calificacions->where('proyecto_id', $proyecto->id);
-        $mycalificacion= $calificacions->where('user_id', Auth::id());
+        
     
+        $donacions= Donacion::all();
+        $donacions= $donacions->where('proyecto_id', $proyecto->id);
+
        
-        return view('/proyectos.showProyecto', compact('proyecto', 'comentarios', 'calificacions'));
+        return view('/proyectos.showProyecto', compact('proyecto', 'comentarios', 'calificacions', 'donacions'));
     }
 
     /**
@@ -236,7 +269,25 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
-        Proyecto::where('id', $proyecto->id)->update($request->except(['_token', '_method']));
+        $request->validate([
+            'titulo'=> 'required',
+            'categoria'=> 'required',
+            'imagen'=> 'image', 
+            'descripcion'=> 'required',
+            'abstracto'=> 'required', 
+            'fecha'=> 'required', 
+        ]);
+
+        if($request->hasFile('imagen')){
+            $direccion=$request->file('imagen')->store('public');
+            $request->merge(['portada'=> $direccion]);
+            $url = str_replace('storage', 'public', $proyecto->portada);
+            Storage::delete($url);
+        }
+        else{
+            $request->merge(['portada'=> $proyecto->portada]);
+        }
+        Proyecto::where('id', $proyecto->id)->update($request->except(['_token', '_method', 'imagen']));
         return redirect('/proyecto')->with('editar','ok');
         //->with('editar','ok');
     }
@@ -249,6 +300,8 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
+        $url = str_replace('storage', 'public', $proyecto->portada);
+        Storage::delete($url);
         $proyecto->delete();
         return redirect('/proyecto')->with('eliminar','ok');
     }

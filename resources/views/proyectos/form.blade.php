@@ -119,6 +119,14 @@
                 <option value="Sociedad">Sociedad</option>
             </select>
           </div>
+          
+          <div class="form-group p-4">
+            <label for="imagen"class="input-group-text btn-primary  bg-opacity-50">Imagen</label>
+            <input accept="image/*" type="file" class="form-control" name="imagen">
+            @error('imagen')
+                <div class="alert alert-danger">{{$message}}</div>
+            @enderror
+          </div>
 
           <div class="form-group p-4">
             <label for="descripcion" class="input-group-text btn-primary  bg-opacity-50">Descripcion</label>

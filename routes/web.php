@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DonacionController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\CalificacionController;
 use App\Http\Controllers\ComentarioController;
@@ -34,9 +35,9 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/details', function () {
+    return view('details');
+});
 
 
 Route::get('/', [ProyectoController::class, 'home'])->name('index');
@@ -62,10 +63,11 @@ Route::get('/profile', function(){
 Route::resource('proyecto', ProyectoController::class);
 Route::get('/all', [ProyectoController::class, 'all']);
 
-
 Route::resource('comentario', ComentarioController::class);
 Route::get('/all', [ComentarioController::class, 'all']);
 
+Route::resource('donacion', DonacionController::class);
+Route::get('/all', [DonacionController::class, 'all']);
 
 Route::resource('calificacion', CalificacionController::class);
 Route::get('/all', [CalificacionController::class, 'all']);

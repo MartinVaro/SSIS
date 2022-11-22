@@ -125,6 +125,38 @@
                                 </div>
 
 
+
+                    <!-- Donaciones realzadas -->
+                    <div class="progress-table-wrap">
+					<div class="progress-table">
+                    <?php 
+                    $suma=$donacions->sum('cantidad');
+                    $porcentaje=(($suma*100)/10000);
+                    ?>
+						<div class="table-row">
+							<div class="serial"></div>
+							<div class="country"> Dinero recaudado: </div>
+							<div class="visit">{{$suma}}</div>
+							<div class="percentage">
+								<div class="progress">
+									<div class="progress-bar color-4" role="progressbar" style="width: {{$porcentaje}}%"
+										aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+						
+					</div>
+				    </div>
+
+
+
+
+
+
+
+
+
+
+
                         <!-- STAR Ranking -->
                             @auth
                             @if (Auth::id()!=$proyecto->user_id)
@@ -294,7 +326,45 @@
                     </div>
                 @endauth
                 @endif
-
+                    <!-- From -->
+                    <div class="section-tittle mb-30 pt-30"">
+                        <h3>Donación</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="/donacion" method="POST"> {{--Crear--}}
+                                @csrf
+                                <div class="row">
+                                            <div class="col-12">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control error" name="nombre" id="nombre" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa tu nombre completo'" placeholder="Ingresa tu nombre completo">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control error" name="cantidad" id="cantidad" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Cantidad que deseas donar'" placeholder="Cantidad que deseas donar">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <input class="form-control error" name="tarjeta" id="tarjeta" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ingresa el número de tu tarjeta'" placeholder="Ingresa el número de tu tarjeta">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control error" name="CVV" id=""CVV" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'CVV'" placeholder="CVV">
+                                                </div>
+                                            </div>
+                                            <input id="proyecto_id" name="proyecto_id" type="hidden" value="{{$proyecto->id}}">
+                                        </div>
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="genric-btn warning-border radius">Donar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                    </div>
             </div>
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonacionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\CalificacionController;
 use App\Http\Controllers\ComentarioController;
@@ -74,6 +75,8 @@ Route::resource('donacion', DonacionController::class);
 Route::resource('calificacion', CalificacionController::class);
 //Route::get('/all', [CalificacionController::class, 'all']);
 
+Route::get('/admin', [UserController::class, 'index'])->middleware('can:dashboard');
+Route::resource('user', UserController::class)->middleware('can:dashboard')->names('users');
 
 
 Route::middleware([
@@ -81,9 +84,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/admin', function () {
+    Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 });
 
-Route::get('/moderador', [ProyectoController::class, 'home'])->name('allproyect');
+//Route::get('/admin', [RoleController::class, ''])->name('allproyect');

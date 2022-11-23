@@ -42,7 +42,6 @@ class ProyectoController extends Controller
             ORDER BY avg(ranking) DESC;");
 
         $collection = collect();
-        
         foreach($calificacions as $cali){
             $combined = $collection->push($cali);
         }

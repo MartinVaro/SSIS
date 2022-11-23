@@ -119,9 +119,9 @@
                         <div class="col-lg-12">
                             <!-- Trending Tittle -->
                             
-                            <div class="about-right mb-90">
+                            <div class="about-right mb-20">
                                 <div class="about-img">
-                                    <img src="{{asset('assets/img/trending/trending_top.jpg')}}" alt="">
+                                    <img src="{{Storage::url($proyecto->portada)}}" alt="">
                                 </div>
 
 

@@ -36,7 +36,7 @@ class ProyectoController extends Controller
         //dd($date->format('Y-m-d'));
         $proyectos= Proyecto::with('user')->get();
         $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
-        $calificacions= DB::select("SELECT proyectos.id,  proyectos.user_id, titulo, categoria, descripcion, abstracto, fecha, avg(ranking) as promedio
+        $calificacions= DB::select("SELECT proyectos.id,  proyectos.user_id, titulo, categoria, portada, descripcion, abstracto, fecha, avg(ranking) as promedio
             FROM proyectos LEFT JOIN calificacions ON proyectos.id=proyecto_id 
             GROUP BY proyectos.id
             ORDER BY avg(ranking) DESC;");
@@ -89,7 +89,7 @@ class ProyectoController extends Controller
     public function search(Request $request)
     {
 
-        $proyectos= DB::select("SELECT proyectos.id, user_id, titulo, categoria, descripcion, abstracto, fecha FROM proyectos 
+        $proyectos= DB::select("SELECT proyectos.id, user_id, titulo, categoria, portada, descripcion, abstracto, fecha FROM proyectos 
         WHERE titulo LIKE '%$request->buscar%' 
         or categoria LIKE '%$request->buscar%'
         or descripcion LIKE '%$request->buscar%'

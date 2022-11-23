@@ -164,15 +164,21 @@
                     <div class="col-lg-8">
                         <!-- Trending Top -->
                         
-                        <div class="trending-top mb-30">
-                            <div class="trend-top-img">
-                                <img src="assets/img/trending/trending_top.jpg" alt="">
-                                <div class="trend-top-cap">
+
                                     <?php $a=0; ?>
                                     @foreach ($combined as $proyecto)
                                         @if ($a==0)
+                                        
+                                        <div class="trending-top mb-30">
+                                        <div class="trend-top-img">
+                                            <img src="{{Storage::url($proyecto->portada)}}" alt="">
+                                            <div class="trend-top-cap">
+                                                
                                         <span>{{$proyecto->titulo}}</span>
                                         <h2><a href="proyecto/{{$proyecto->id}}">{{$proyecto->abstracto}}</a></h2>
+                                        
+
+                                        
                                         @endif
                                     <?php $a=$a+1;?>
                                     @if($a==1)
@@ -192,7 +198,7 @@
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom2.jpg" alt="">
+                                            <img src="{{Storage::url($proyecto->portada)}}" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
@@ -217,10 +223,10 @@
                     <div class="col-lg-4">
                         <?php $a=0; ?>
                         @foreach ($combined as $proyecto)
-                        @if ($a>=4 && $a<=7)                
+                        @if ($a>=4 && $a<=6)                
                         <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="assets/img/trending/right1.jpg" alt="">
+                                <div class="trand-right-img  mb-30"">
+                                    <img src="{{Storage::url($proyecto->portada)}}" alt="">
                                 </div>
                                 <div class="trand-right-cap">
                                     <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
@@ -231,7 +237,7 @@
                         <?php
                             $a=$a+1;
                         ?>
-                        @if ($a==8)
+                        @if ($a==7)
                             @break
                         @endif
                         @endforeach
@@ -259,7 +265,7 @@
                             @foreach ($fechados as $proyecto)
                             <div class="weekly-single">
                                 <div class="weekly-img">
-                                    <img src="assets/img/news/weeklyNews1.jpg" alt="">
+                                    <img src="{{Storage::url($proyecto->portada)}}" alt="">
                                 </div>
                                 <div class="weekly-caption"> 
                                     

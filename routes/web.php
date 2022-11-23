@@ -40,8 +40,10 @@ Route::get('/details', function () {
 });
 
 
-Route::get('/', [ProyectoController::class, 'home'])->name('index');
+Route::get('/', [ProyectoController::class, 'home']);
 
+
+//Route::get('/', [ProyectoController::class, 'home'])->name('index'); asi la tenia antes
 
 Route::get('/search', [ProyectoController::class, 'search'])->name('searchindex');
 Route::get('/categoria/ambiente', [ProyectoController::class, 'search_ambiente'])->name('trindex');
@@ -61,16 +63,16 @@ Route::get('/profile', function(){
 
 
 Route::resource('proyecto', ProyectoController::class);
-Route::get('/all', [ProyectoController::class, 'all']);
+//Route::get('/all', [ProyectoController::class, 'all']);
 
 Route::resource('comentario', ComentarioController::class);
-Route::get('/all', [ComentarioController::class, 'all']);
+//Route::get('/all', [ComentarioController::class, 'all']);
 
 Route::resource('donacion', DonacionController::class);
-Route::get('/all', [DonacionController::class, 'all']);
+//Route::get('/all', [DonacionController::class, 'all']);
 
 Route::resource('calificacion', CalificacionController::class);
-Route::get('/all', [CalificacionController::class, 'all']);
+//Route::get('/all', [CalificacionController::class, 'all']);
 
 
 
@@ -79,7 +81,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/admin', function () {
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/moderador', [ProyectoController::class, 'home'])->name('allproyect');

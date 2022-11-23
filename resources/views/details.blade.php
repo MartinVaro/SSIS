@@ -239,9 +239,9 @@
                         <div class="col-lg-12">
                             <!-- Trending Tittle -->
                             <div class="about-right mb-90">
-                                <div class="about-img">
+                                
                                     <img src="assets/img/trending/trending_top.jpg" alt="">
-                                </div>
+                               
                                 <div class="section-tittle mb-30 pt-30">
                                     <h3>Here come the moms in space</h3>
                                 </div>

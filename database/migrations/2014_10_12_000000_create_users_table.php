@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
             $table->string('carrera')->nullable();
-            $table->string('tipo_usuario')->nullable();
         });
     }
 

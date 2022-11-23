@@ -171,7 +171,7 @@
                             @foreach ($proyectos as $proyecto)
                             <div class="trand-right-single d-flex">
                                 <div class="trand-right-img">
-                                    <img src="assets/img/trending/right2.jpg" alt="">
+                                    <img src="{{Storage::url($proyecto->portada)}}" alt="">
                                 </div>
                                 <div class="trand-right-cap">
                                     <span class="color3"><a style="color:#000000;" href='/proyecto/{{$proyecto->id}}' >{{$proyecto->titulo}}</a></span>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
@@ -16,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users= User::All();
+
         return view('users.index', compact('users'));
     }
 

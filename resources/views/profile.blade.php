@@ -38,7 +38,7 @@
             <!-- Navbar Brand-->
             @if (Route::has('login'))
                 @auth
-                <a class="navbar-brand ps-3" href="/" style="color:#51ff00; font-size: 15px;">Home</a>
+                <a class="navbar-brand ps-3" href="/" style="color:#51ff00; font-size: 15px;"></a>
                 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <a class="navbar-brand ps-3" href="{{ url('/profile') }}" style="color:#51ff00; font-size: 15px;">{{ Auth::user()->name }} {{ Auth::user()->apellido }}</a>
                 <li class="nav-item dropdown">
@@ -46,12 +46,18 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.index')}}" style="color:#050505; font-size: 15px;"">Mis Proyectos</a></li>
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.create')}}" style="color:#050505; font-size: 15px;"">Crear Proyecto</a></li>
-                        <li><form method="POST" action="{{route('logout')}}">
+                    @can('dashboard') 
+                        <li><a class="navbar-brand ps-3" href="admin" style="color:#050505; font-size: 15px;"">Admin/Usuarios</a></li>
+                    @endcan
+                    @can('allproyect')
+                        <li><a class="navbar-brand ps-3" href="admin/proyectos" style="color:#050505; font-size: 15px;"">Admin/Proyectos</a></li>
+                    @endcan
+                    <li><form method="POST" action="{{route('logout')}}">
                             @csrf
                             <a class="navbar-brand ps-3" href="{{route('logout')}}" onclick="event.preventDefault();
                             this.closest('form').submit(); " style="color:#050505; font-size: 15px;"">Cerrar sesión</a>
                             </form>  
-                        </li>  
+                    </li>
                     </ul>
                 </li>
             </ul>

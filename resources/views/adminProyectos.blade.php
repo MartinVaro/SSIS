@@ -44,10 +44,10 @@
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.index')}}" style="color:#050505; font-size: 15px;"">Mis Proyectos</a></li>
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.create')}}" style="color:#050505; font-size: 15px;"">Crear Proyecto</a></li>
                     @can('dashboard') 
-                        <li><a class="navbar-brand ps-3" href="admin" style="color:#050505; font-size: 15px;"">Admin/Usuarios</a></li>
+                        <li><a class="navbar-brand ps-3" href="/admin" style="color:#050505; font-size: 15px;"">Admin/Usuarios</a></li>
                     @endcan
                     @can('allproyect')
-                        <li><a class="navbar-brand ps-3" href="admin/proyectos" style="color:#050505; font-size: 15px;"">Admin/Proyectos</a></li>
+                        <li><a class="navbar-brand ps-3" href="" style="color:#050505; font-size: 15px;"">Admin/Proyectos</a></li>
                     @endcan
                     <li><form method="POST" action="{{route('logout')}}">
                             @csrf
@@ -58,7 +58,6 @@
                     </ul>
                 </li>
             </ul>
-
 
                 @else
                 <div class="main-menu d-none d-md-block ps-3">
@@ -97,74 +96,57 @@
     </header>
 
 
+        <!-- About US Start -->
+        <div class="about-area">
+            <div class="container">
+                   <div class="row">
+                        <div class="col-lg-10">
+                            <!-- Trending Tittle -->
+                            <div class="about-right mb-90">
+                                
+                            <h1 class="p-4 text-info text-center">Listado de proyectos</h1>
+                                <div class="conteiner-fluid" >
+                                <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <tr class="p-3 mb-2 bg-info text-white">
+                                            <th>ID</th>
+                                            <th>Autor</th>
+                                            <th>Titulo</th>
+                                            <th>Abstracto</th>
+                                            <th>Fecha</th>
+                                        <th style="width:10px;"> Acciones </th>
+                                        </tr>
+                                        @foreach ($proyectos as $proyecto)
+                                        <tr>
+                                            <td>{{$proyecto->id}}</td>
+                                            <td>{{$proyecto->user->name}} {{$proyecto->user->apellido}}</td>
+                                            <td>{{$proyecto->titulo}}</td>
+                                            <td>{{$proyecto->abstracto}}</td>
+                                            <td>{{$proyecto->fecha}}</td>
+                                            <td> <a href="/proyecto/{{$proyecto->id}}" class="genric-btn success-border medium">Mostrar</a>
+                                                <a href="/proyecto/{{$proyecto->id}}/edit" class="genric-btn info-border medium"> Editar </a>
+                                                <form id="{{$proyecto->id}}" action="/proyecto/{{$proyecto->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="button" class="genric-btn danger-border medium" onclick="detener(event, {{$proyecto->id}});" value="Borrar"> 
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                                </div>
+                                </div>
+                        </div>
+                        
+                   </div>
+            </div>
+        </div>
 
 
-<h1 class="text-info text-center">Agregar Proyecto</h1>
-    <div class="container p-5 border border-3 rounded w-75">
-      <form action="/proyecto" enctype="multipart/form-data" method="POST"> {{--Crear--}}
-          @csrf
-          <div class="form-group p-4">
-            <label for="titulo" class="input-group-text btn-primary  bg-opacity-50">Titulo</label>
-            <input type="text" class="form-control" name="titulo" value="{{old('titulo')}}" required>
-            @error('titulo')
-                <div class="alert alert-danger">{{$message}}</div>
-            @enderror
-          </div>
-
-          <div  class="input-group p-4">
-            <label class="input-group-text btn-primary" for="categoria">Categoria</label>
-            <select class="form-select" name="categoria" id="categoria">
-                <option value=""></option>
-                <option value="Ambiente">Ambiente</option>
-                <option value="Universo">Universo</option>
-                <option value="Educación">Educación</option>
-                <option value="Desarrollo Sustentable">Desarrollo Sustentable</option>
-                <option value="Desarrollo Tecnológico">Desarrollo Tecnológico</option>
-                <option value="Energía">Energía</option>
-                <option value="Salud">Salud</option>
-                <option value="Sociedad">Sociedad</option>
-            </select>
-          </div>
-          
-          <div class="form-group p-4">
-            <label for="imagen"class="input-group-text btn-primary  bg-opacity-50">Imagen</label>
-            <input accept="image/*" type="file" class="form-control" name="imagen">
-            @error('imagen')
-                <div class="alert alert-danger">{{$message}}</div>
-            @enderror
-          </div>
-
-          <div class="form-group p-4">
-            <label for="descripcion" class="input-group-text btn-primary  bg-opacity-50">Descripcion</label>
-            <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="10">{{old('descripcion')}}</textarea>
-            @error('descripcion')
-                <div class="alert alert-danger">{{$message}}</div>
-            @enderror <br>
-          </div>
-          <div class="form-group p-4">
-            <label for="fecha" class="input-group-text btn-primary  bg-opacity-50">Fecha</label>
-            <input type="date" class="form-control" name="fecha" value="{{old('fecha')}}" required>
-            @error('fecha')
-                <div class="alert alert-danger">{{$message}}</div>
-            @enderror
-          </div>
-
-          <div class="form-group p-4">
-            <label for="abstracto" class="input-group-text btn-primary  bg-opacity-50">Abstracto</label>
-            <textarea class="form-control" name="abstracto" id="abstracto" cols="30" rows="10">{{old('Abstracto')}}</textarea>
-            @error('abstracto')
-                <div class="alert alert-danger">{{$message}}</div>
-            @enderror <br>
-            
-          </div>
-          <button type="submit" class="btn btn-primary active">Enviar</button>
-      </form>
-    </div>
-    <script>
-
-
-
-
+        <!-- About US End -->
+    </main>
 
 
 <!-- JS here -->
@@ -212,4 +194,55 @@
     </body>
 </html>
 
- 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        @if(session('crear')=='ok')
+        <script>
+            Swal.fire(
+            'Registro completo!',
+            'Tu proyecto se creó con éxito',
+            'success')
+        </script>
+        @endif
+
+        @if(session('eliminar')=='ok')
+        <script>
+            Swal.fire(
+            'Eliminado!',
+            'Tu proyecto se eliminó con éxito',
+            'success')
+        </script>
+        @endif
+        
+        @if(session('editar')=='ok')
+        <script>
+            Swal.fire(
+            'Editado!',
+            'Tu proyecto se actualizó con éxito',
+            'success')
+        </script>
+        @endif
+
+        <script type="text/javascript">
+        function detener(evt, contenedor){
+            evt.preventDefault();
+            Swal.fire({
+            title: '¿Está seguro?',
+            text: "Este libro se eliminará definitivamente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(contenedor).submit();
+                //document.queryselector.All();
+            }
+            })
+
+
+        };
+</script>

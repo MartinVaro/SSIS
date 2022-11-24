@@ -11,6 +11,7 @@ use App\Models\Calificacion;
 use App\Models\Comentario;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\DB;
 
@@ -30,12 +31,18 @@ class ProyectoController extends Controller
         $this->middleware('verified')->except(['all','show','home','search','search_ambiente', 'search_universo', 'search_educacion', 'search_tecnologico', 'search_energia', 'search_salud', 'search_sociedad','search_sustentable']);
     }
 
+    public function admin(){
+        $proyectos=Proyecto::all();
+        return view('/adminProyectos', compact('proyectos'));
+    }
+
     public function home()
     {
         //$date = Carbon::now();
         //dd($date->format('Y-m-d'));
         $proyectos= Proyecto::with('user')->get();
         $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
+        
         $calificacions= DB::select("SELECT proyectos.id,  proyectos.user_id, titulo, categoria, portada, descripcion, abstracto, fecha, avg(ranking) as promedio
             FROM proyectos LEFT JOIN calificacions ON proyectos.id=proyecto_id 
             GROUP BY proyectos.id
@@ -45,8 +52,33 @@ class ProyectoController extends Controller
         foreach($calificacions as $cali){
             $combined = $collection->push($cali);
         }
-
         $combined= $combined->whereNotIn('user_id', [Auth::id()]);
+
+
+        //////////////////////////////////////////////////AQUI ANDO TRABAJANDO
+
+        $id=Auth::id();
+        $calando= Calificacion::all();
+        $calando= $calando->where('user_id', $id);
+        
+        $preferencias = collect();
+        foreach($calando as $tematica){
+            //dd($tematica->tema);
+            $grupodetemas=$proyectos->where('categoria', $tematica->tema);
+            foreach($grupodetemas as $particular){
+                
+                $preferencias=$preferencias->push($particular);
+            }
+            
+        }
+
+        if($preferencias->isEmpty()){
+            $preferencias=$proyectos;
+        }
+        $preferencias = $preferencias->shuffle();
+  
+        /////////////////////////////////////////////////////////////////
+
 
         //$calificacions= Calificacion::with('user')->get();
         //$avg=$calificacions->avg('ranking');
@@ -57,7 +89,9 @@ class ProyectoController extends Controller
         $fechados = $proyectos->sortBy([['fecha','desc']]);
         $userLog = Auth::id();
         //return  compact('proyectos');
-        return view('index', compact('proyectos', 'combined', 'fechados','userLog'));
+
+
+        return view('index', compact('proyectos', 'combined', 'fechados','preferencias','userLog'));
         //return view('/index', compact('proyectos', 'randoms', 'fechados','userLog'));
         //$libros = Libro::all();
         //return view('/libros.listaLibros', compact('libros', 'userLog'));
@@ -132,7 +166,7 @@ class ProyectoController extends Controller
     {
         $proyectos= Proyecto::with('user')->get();
         $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
-        $proyectos= $proyectos->where('categoria', 'Desarrollo Sustentable');
+        $proyectos= $proyectos->where('categoria', 'Sustentable');
         return view('trindex', compact('proyectos'));      
     }
 
@@ -141,7 +175,7 @@ class ProyectoController extends Controller
     {
         $proyectos= Proyecto::with('user')->get();
         $proyectos= $proyectos->whereNotIn('user_id', [Auth::id()]);
-        $proyectos= $proyectos->where('categoria', 'Desarrollo Tecnológico');
+        $proyectos= $proyectos->where('categoria', 'Tecnológico');
         return view('trindex', compact('proyectos'));      
     }
 
@@ -287,7 +321,8 @@ class ProyectoController extends Controller
             $request->merge(['portada'=> $proyecto->portada]);
         }
         Proyecto::where('id', $proyecto->id)->update($request->except(['_token', '_method', 'imagen']));
-        return redirect('/proyecto')->with('editar','ok');
+        return back()->with('editar','ok');
+        //return redirect('/proyecto')->with('editar','ok');
         //->with('editar','ok');
     }
 
@@ -302,6 +337,7 @@ class ProyectoController extends Controller
         $url = str_replace('storage', 'public', $proyecto->portada);
         Storage::delete($url);
         $proyecto->delete();
-        return redirect('/proyecto')->with('eliminar','ok');
+        return back()->with('eliminar','ok');
+        //return redirect('/proyecto')->with('eliminar','ok');
     }
 }

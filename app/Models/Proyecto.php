@@ -18,6 +18,6 @@ class Proyecto extends Model
     }
     
     public $timestamps =false;
-    protected $fillable = ['user_id','titulo','categoria','descripcion','abstracto','fecha'];
+    protected $fillable = ['user_id','titulo','categoria','descripcion','portada','abstracto','fecha'];
 
 }

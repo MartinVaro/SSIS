@@ -43,16 +43,21 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.index')}}" style="color:#050505; font-size: 15px;"">Mis Proyectos</a></li>
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.create')}}" style="color:#050505; font-size: 15px;"">Crear Proyecto</a></li>
-                        <li><form method="POST" action="{{route('logout')}}">
+                    @can('dashboard') 
+                        <li><a class="navbar-brand ps-3" href="admin" style="color:#050505; font-size: 15px;"">Admin/Usuarios</a></li>
+                    @endcan
+                    @can('allproyect')
+                        <li><a class="navbar-brand ps-3" href="admin/proyectos" style="color:#050505; font-size: 15px;"">Admin/Proyectos</a></li>
+                    @endcan
+                    <li><form method="POST" action="{{route('logout')}}">
                             @csrf
                             <a class="navbar-brand ps-3" href="{{route('logout')}}" onclick="event.preventDefault();
                             this.closest('form').submit(); " style="color:#050505; font-size: 15px;"">Cerrar sesión</a>
                             </form>  
-                        </li>  
+                    </li>
                     </ul>
                 </li>
             </ul>
-
 
                 @else
                 <div class="main-menu d-none d-md-block ps-3">
@@ -114,7 +119,7 @@
                                         @foreach ($users as $user)
                                         <tr>
                                             <td>{{$user->id}}</td>
-                                            <td>{{$user->name}}{{$user->apellido}}</td>
+                                            <td>{{$user->name}} {{$user->apellido}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>
                                                 <a href="{{route('users.edit', $user)}}" class="genric-btn info-border medium"> Editar </a>

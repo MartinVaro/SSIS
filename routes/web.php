@@ -76,6 +76,9 @@ Route::resource('calificacion', CalificacionController::class);
 //Route::get('/all', [CalificacionController::class, 'all']);
 
 Route::get('/admin', [UserController::class, 'index'])->middleware('can:dashboard');
+
+Route::get('/admin/proyectos', [ProyectoController::class, 'admin'])->middleware('can:allproyect');
+
 Route::resource('user', UserController::class)->middleware('can:dashboard')->names('users');
 
 

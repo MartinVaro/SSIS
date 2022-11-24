@@ -224,6 +224,7 @@
                                                             <div class="stars">
                                                                 <form action="/calificacion" method="POST"> 
                                                                     @csrf 
+                                                                    <input id="tema" name="tema" type="hidden" value="{{$proyecto->categoria}}">
                                                                     <input id="proyecto_id" name="proyecto_id" type="hidden" value="{{$proyecto->id}}">
                                                                     <input type="radio" class="star star-5" id="star-5"  value=5 name="ranking"/>  
                                                                     <label class="star star-5" for="star-5"></label>           
@@ -266,7 +267,7 @@
                                     <p class="about-pera1 mb-25">{{$proyecto->abstracto}}</p>
                                 </div>  
                                 <div class="about-prea">
-                                    <p class="about-pera1 mb-25">Temática: {{$proyecto->categoria}}</p>
+                                    <p class="about-pera1 mb-25"><strong>Temática: </strong>{{$proyecto->categoria}}</p>
                                 </div> 
                                 <div class="section-tittle mb-30 pt-30">
                                     <h3>Descripción</h3>

@@ -44,18 +44,23 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.index')}}" style="color:#050505; font-size: 15px;"">Mis Proyectos</a></li>
                         <li><a class="navbar-brand ps-3" href="{{route('proyecto.create')}}" style="color:#050505; font-size: 15px;"">Crear Proyecto</a></li>
-                        <li><form method="POST" action="{{route('logout')}}">
+                    @can('dashboard') 
+                        <li><a class="navbar-brand ps-3" href="admin" style="color:#050505; font-size: 15px;"">Admin/Usuarios</a></li>
+                    @endcan
+                    @can('allproyect')
+                        <li><a class="navbar-brand ps-3" href="admin/proyectos" style="color:#050505; font-size: 15px;"">Admin/Proyectos</a></li>
+                    @endcan
+                    <li><form method="POST" action="{{route('logout')}}">
                             @csrf
                             <a class="navbar-brand ps-3" href="{{route('logout')}}" onclick="event.preventDefault();
                             this.closest('form').submit(); " style="color:#050505; font-size: 15px;"">Cerrar sesión</a>
                             </form>  
-                        </li>  
+                    </li>
                     </ul>
                 </li>
             </ul>
 
-
-                @else
+            @else
                 <div class="main-menu d-none d-md-block ps-3">
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline" style="color:#51ff00; font-size: 15px;">Log in</a>
                     @if (Route::has('register'))
@@ -107,7 +112,7 @@
                                             <li><a href="/categoria/energia"style="color:#0db851;">Energía</a></li>
                                             <li><a href="/categoria/salud"style="color:#0db851;">Salud</a></li>
                                             <li><a href="/categoria/sociedad"style="color:#0db851;">Sociedad</a></li>
-                                        </ul>
+                                            </ul>
                                     </nav>
                                 </div>
                             </div>             
@@ -115,9 +120,8 @@
                                 <div class="header-right-btn f-right d-none d-lg-block">
                                     <i class="fas fa-search special-tag"></i>
                                     <div class="search-box">
-                                        <form action="#">
-                                            <input type="text" placeholder="Buscar">
-                                            
+                                        <form action="/search">
+                                            <input type="text" id="buscar" name="buscar" placeholder="Buscar">
                                         </form>
                                     </div>
                                 </div>
@@ -139,7 +143,115 @@
     <main>
     <!-- Trending Area Start -->
 
+@if (Route::has('login'));
+    @auth
+    <div class="trending-area fix">
+        <div class="container">
+            <div class="trending-main">
+                <!-- Trending Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="trending-tittle">
+                            <strong>Recomendados</strong>
+                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
+                            <div class="trending-animated">
+                                <ul id="js-news" class="js-hidden">
+                                    @foreach ($preferencias as $proyecto)
+                                    <li class="news-item">{{$proyecto->titulo}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Trending Top -->
+                        
 
+                                    <?php $a=0; ?>
+                                    @foreach ($preferencias as $proyecto)
+                                        @if ($a==0)
+                                        
+                                        <div class="trending-top mb-30">
+                                        <div class="trend-top-img">
+                                            <img src="{{Storage::url($proyecto->portada)}}" alt="">
+                                            <div class="trend-top-cap">
+                                                
+                                        <span>{{$proyecto->titulo}}</span>
+                                        <h2><a href="proyecto/{{$proyecto->id}}">{{$proyecto->abstracto}}</a></h2>
+                                        
+
+                                        
+                                        @endif
+                                    <?php $a=$a+1;?>
+                                    @if($a==1)
+                                        @break
+                                    @endif
+                                    @endforeach
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Trending Bottom -->
+                        <div class="trending-bottom">
+                            <div class="row">
+                            <?php $a=0; ?>
+                                @foreach ($preferencias as $proyecto)  
+                                @if ($a>=1 && $a<=3) 
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="{{Storage::url($proyecto->portada)}}" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
+                                            <p>{{$proyecto->abstracto}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                <?php
+                                    $a=$a+1;
+                                ?>
+                                @if($a==4)
+                                    @break
+                                @endif
+                                @endforeach
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Riht content -->
+                    <div class="col-lg-4">
+                        <?php $a=0; ?>
+                        @foreach ($preferencias as $proyecto)
+                        @if ($a>=4 && $a<=6)                
+                        <div class="trand-right-single d-flex">
+                                <div class="trand-right-img  mb-30"">
+                                    <img src="{{Storage::url($proyecto->portada)}}" alt="">
+                                </div>
+                                <div class="trand-right-cap">
+                                    <span class="color3"><a style="color:#000000;" href="proyecto/{{$proyecto->id}}" >{{$proyecto->titulo}}</a></span>
+                                    <p>{{$proyecto->abstracto}}</p>
+                                </div>
+                        </div>
+                        @endif 
+                        <?php
+                            $a=$a+1;
+                        ?>
+                        @if ($a==7)
+                            @break
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
     <div class="trending-area fix">
         <div class="container">
             <div class="trending-main">
@@ -246,6 +358,10 @@
             </div>
         </div>
     </div>
+
+    @endauth           
+@endif
+
     <!-- Trending Area End -->
     <!--   Weekly-News start -->
     <div class="weekly-news-area pt-50">

@@ -14,6 +14,6 @@ class Calificacion extends Model
     }
 
     public $timestamps =false;
-    protected $fillable = ['user_id','proyecto_id','ranking'];
+    protected $fillable = ['user_id','proyecto_id','ranking','tema'];
 
 }
